@@ -4,7 +4,7 @@ My ansible project
 
 ## Best Practices
 
-* Tree
+Tree
 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
 
@@ -29,3 +29,4 @@ ansible db  -i inventory --list-hosts
 ``` shell
 ansible-playbook -i inventory my_playbook.yml
 ```
+

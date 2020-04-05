@@ -1,14 +1,57 @@
 ---
 
-- name: run the playbook tasks on the localhost
-  hosts: 127.0.0.1
-  connection: local
-  become: yes
+# Execute playbook
+
+- name: playbook - Execute multiple task 
+  hosts: localhost
+  gather_facts: true
+
+
+## Execute multiple tasks 1
+  tasks:
+
+    - name: playbook - execute task 1
+      shell: echo 'this is a loose task 1'
+  
+    - name: playbook - execute task 2
+      shell: echo 'this is a loose task 2'
+
+
+      # Execute playbook
+
+- name: playbook - Execute multiple task 
+  hosts: localhost
+  gather_facts: true
+
+
+## Execute multiple tasks 2
+  tasks:
+
+    - name: playbook - execute task 1
+      shell: echo 'this is a loose task 1'
+  
+    - name: playbook - execute task 2
+      shell: echo 'this is a loose task 2'
+
+
+## A voir la notion de block:
+
+
+## Execute multiple roles
+
+- name: playbook - execute multiple Role 1
+  hosts: localhost
+  
+  roles:
+    - common
+
+- name: playbook - execute multiple Role 2
+  hosts: localhost
+  
+  roles:
+    - role_1
   
   tasks:
- 
-  - name: print out the hostname of target
-    command: hostname
-
+    - shell: echo 'this is a loose task 1'
 
 

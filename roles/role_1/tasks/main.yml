@@ -1,0 +1,5 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: Task in Role Role_1 - Execute task hostname of target
+  command: hostname

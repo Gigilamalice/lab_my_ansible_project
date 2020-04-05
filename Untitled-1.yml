@@ -1,0 +1,18 @@
+## Execute multiple roles
+
+- name: playbook - execute multiple Role 1
+  hosts: localhost
+  
+  roles:
+    - common
+
+- name: playbook - execute multiple Role 2
+  hosts: localhost
+  
+  roles:
+    - role_1
+  
+  tasks:
+    - shell: echo 'this is a loose task 1'
+
+    
