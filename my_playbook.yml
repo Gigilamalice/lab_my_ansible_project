@@ -1,13 +1,13 @@
 ---
 
-# Execute playbook
+# Execute group of tasks
 
 - name: playbook - Execute multiple task 
   hosts: localhost
   gather_facts: true
 
 
-## Execute multiple tasks 1
+  ## Execute multiple tasks 
   tasks:
 
     - name: playbook - execute task 1
@@ -17,14 +17,14 @@
       shell: echo 'this is a loose task 2'
 
 
-      # Execute playbook
+# Execute group of tasks
 
 - name: playbook - Execute multiple task 
   hosts: localhost
   gather_facts: true
 
 
-## Execute multiple tasks 2
+  ## Execute multiple tasks
   tasks:
 
     - name: playbook - execute task 1

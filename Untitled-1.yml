@@ -4,15 +4,10 @@
   hosts: localhost
   
   roles:
-    - common
+    - name: toto
+      common
 
-- name: playbook - execute multiple Role 2
-  hosts: localhost
-  
-  roles:
-    - role_1
-  
-  tasks:
-    - shell: echo 'this is a loose task 1'
+    - name: toto 
+      role_1
 
-    
+
