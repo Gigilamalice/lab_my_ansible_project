@@ -1,0 +1,9 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: Install ntp
+  yum:
+    name: ntp
+    state: present
+  tags: ntp
+  
