@@ -21,7 +21,7 @@ ansible localhost -m uri -a 'url=http://www.google.com/ return_content=yes'
 
 ``` shell
 ansible all -i hosts --list-hosts 
-ansible db  -i horts --list-hosts
+ansible db  -i hosts --list-hosts
 ```
 
 * Test playbook
