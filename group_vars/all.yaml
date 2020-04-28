@@ -1,3 +1,5 @@
-# my first variable
-var1: hello
+---
+# Variables listed here are applicable to all host groups
+
+variable1: hello
 
