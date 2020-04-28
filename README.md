@@ -26,4 +26,6 @@ ansible db  -i hosts --list-hosts
 
 * Test playbook
 
-
+``` shell
+ansible-playbook -i hosts site.yml
+```
