@@ -20,6 +20,10 @@ ansible localhost -m uri -a 'url=http://www.google.com/ return_content=yes'
 * Test inventory file ./inventory_test
 
 ``` shell
-ansible all -i inventory_test --list-hosts 
-ansible db --list-hosts -i inventory_test
+ansible all -i hosts --list-hosts 
+ansible db  -i horts --list-hosts
 ```
+
+* Test playbook
+
+
