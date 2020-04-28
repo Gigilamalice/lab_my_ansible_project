@@ -1,8 +1,14 @@
 # lab_my_ansible_project
+
 My ansible project
 
+## Best Practices
 
-## Test 
+* Tree
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+
+## Test my project
 
 
 * Test ansible.cfg
