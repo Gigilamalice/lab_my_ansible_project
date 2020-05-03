@@ -1,0 +1,2 @@
+ntp_server: ntp.db1.example.org
+database_server: db.db1.example.org

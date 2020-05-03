@@ -1,0 +1,215 @@
+#Concept Ansible
+
+- Managed node (system to be managed via ssh)
+- Inventory (list of Managed node statics or dynamique)
+- Control node
+- Tasks inside a Playbook
+- ansible .cfg file (configuration file to access Managed system)
+- plugins (extend ansible capabilities)
+- modules (code en python, exemple le module ping)
+
+!!!Think what is the desired state,  ansible is not a sciptable language
+
+ # Installation sur LINUX RHEL7.6
+#---------------------------------------------------
+yum install -y ansible
+ansible --version
+yum update -y
+ansible --version
+yum install python-pip -y
+
+
+ # Installation sur LINUX CENTOS7
+ #---------------------------------------------------
+'um install -y python
+yum install -y ansible
+ansible --version
+yum update'
+ansible --version`
+
+* Install pip extension
+'sudo yum install epel-release
+sudo yum install python-pip -y '
+python lib
+/usr/lib/python2.7/
+
+
+# Installation sur MAC
+#---------------------------------------------------
+`sudo easy_install pip`
+`sudo pip install ansible`
+
+# Inventory
+#---------------------------------------------------
+
+* create inventory file
+
+mkdir ~/dep-install
+nano inventory
+
+[DEV]
+servera.lab.example.com
+serverb.lab.example.com
+
+* list node inside inventory
+ansible dev -i inventory --list-hots
+
+* add inventory node
+nano /etc/ansible/hosts
+servera.lab.example.com
+
+[webservers]
+serverb.lab.example.com
+
+
+* list node 
+ansible all --list-hosts
+ansible ungrouped --list-hosts
+ansible webservers --list-hosts
+
+# execute mopdules with privilege
+
+* to see wich config file is used
+ansible --version
+
+touch ansible.cfg
+ansible --version
+or ansible dev -i inventory --list-hots -v
+
+ssh-copy-id root@serverd.lab.example.com
+
+* execute command
+ansible all -m yum -a name=nano  -i vagrant_ansible_inventory -b
+> -b to be sudo root
+
+# Config file
+
+* create ansible.cfg
+
+[defaults]
+remote_user = devops
+inventory = inventory
+
+[privilege_escalation]
+become = False
+become_method = sudo
+become_user = root
+become_ask_pass = False
+
+# inventory files dynamic
+
+* exemple scripts
+
+
+* list all inventory
+ansible-inventory --list all
+
+
+# playbook / multiple play
+
+* Example
+
+ansible-playbook Playbook-etcd.yml --syntax-check
+ansible-playbook Playbook-etcd.yml -C # to check
+ansible-playbook Playbook-etcd.yml -v #to debug ... -vv -vvv
+
+- name: Configure properly tree
+  hosts: localhost
+  tasks:
+    - name: Ensure that etcd is present
+      yum:
+        name: tree
+        state: present
+      become: True
+
+- name: manage etcd
+  hosts: localhost
+  become: true
+  tasks:
+    - name: etcd
+      etcd3:
+        key: ansible1
+        value: "Hello"
+        host: 192.168.60.10
+        port: 2379
+        state: present
+      register: result
+
+    - name: debug
+      debug:
+        var: result
+
+# Ansible documentation
+
+ansible-doc
+ansible-doc 
+
+# variables ansibles
+
+Voir ansible variable precedence
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable
+
+
+* example cfgfiles
+
+[defaults]
+remote_user = vagrant
+inventory = ./inventory
+
+[privilege_escalation]
+become = False
+
+* example inventory file
+
+[webservers]
+etcd2 
+etcd1
+
+[dbservers]
+etcd0
+
+[servers:children]
+webservers
+dbservers
+
+[servers:vars]
+ansible_user=vagrant
+ansible_become=yes
+package=httpd
+
+
+* exemple playbook.yml
+
+---
+  - name: demo variables
+    hosts: all
+    tasks: 
+      - name: install package "{{ package }}" package
+        yum:
+          name: "{{ package }}"
+          state: latest
+        register: output
+
+      - name: debug
+        debug:
+          var: output.changed
+
+* example local var
+
+mkdir host_vars
+cd host_vars
+touch host_vars\etcd2
+echo >"package : tree"
+
+mkdir group_vars
+cd group_vars
+touch dbservers
+echo > "package: screen"
+
+# Hash de password
+
+https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+
+Le Hash d'un password est une emprunte qui est stocké dans une base ou /etc/shadow pour ne pas à avoir à stocker le véritable password. Ce hash ne permet pas de retrouver le password biensur (sauf par comparaison avec un dictionnaire). Cas d'usage : Lors d'un login avec password, il est comparé au hash du password saisie pour valider le user.
+
+

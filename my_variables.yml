@@ -1,0 +1,25 @@
+---
+
+  - hosts: dbs
+    gather_facts: true
+
+    vars:
+      database_server: db.playbook.example.org
+   
+    tasks:
+
+    - name: debug ansible_machine = '{{ ansible_machine }}'
+      shell: echo
+
+    - name: debug ntp_server = "{{ ntp_server }}"
+      shell: echo
+
+    - name: debug database_server = "{{ database_server }}"
+      shell: echo
+
+#    - name: Display all variables/facts known for a host
+#      debug:
+#        var: hostvars[inventory_hostname]
+#        verbosity: 4
+
+    - debug: var=ansible_facts
