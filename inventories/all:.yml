@@ -1,0 +1,23 @@
+all:
+  hosts:
+    helper: ansible_connection = local 
+  
+  children:
+    toto:
+      db1: 
+      app1: 
+      web1: 
+
+    db:
+      hosts:
+        db1: 
+
+    app:
+      hosts:
+        app1: 
+
+    web:
+      hosts:
+        web1: 
+
+

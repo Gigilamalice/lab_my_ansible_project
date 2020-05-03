@@ -1,0 +1,14 @@
+[all]
+web1
+app1
+db1
+
+[db]
+db1
+
+[app]
+app1
+
+[web]
+web1
+
